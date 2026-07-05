@@ -1,0 +1,116 @@
+.propose-date-container {
+    width: 90%;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.propose-date-container h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.propose-date-container h2 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.recipient-name {
+    font-weight: bold;
+    color: #FF4081;
+}
+
+form .form-group {
+    margin-bottom: 15px;
+    margin-right: 25px;
+    text-align: left;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 5px;
+}
+
+form input[type="date"],
+form textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+form textarea {
+    resize: none;
+    height: 100px;
+}
+
+.btn-primary {
+    background-color: #FF4081;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #d02a61;
+}
+
+.table-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.table-button {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #007bff;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.table-button:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.table-button.selected {
+    background-color: #28a745;
+    color: #fff;
+    border-color: #28a745;
+    font-weight: bold;
+}
+
+.table-button.disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.notification {
+    background-color: #dff0d8;
+    color: #3c763d;
+    padding: 10px;
+    border: 1px solid #d6e9c6;
+    border-radius: 5px;
+    margin: 20px 0;
+    text-align: center;
+}

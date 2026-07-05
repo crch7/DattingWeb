@@ -1,0 +1,54 @@
+document.addEventListener('DOMContentLoaded', function () {
+    let currentCaseIndex = 0;
+    let intervalId;
+
+    const realCaseTitle = document.getElementById('real-case-title');
+    const realCaseStory = document.getElementById('real-case-story');
+    const realCaseImage = document.getElementById('real-case-image');
+    const prevArrow = document.getElementById('prev-arrow');
+    const nextArrow = document.getElementById('next-arrow');
+
+
+    function updateRealCase() {
+        const caseData = realCases[currentCaseIndex];
+        realCaseTitle.innerText = caseData.title;
+        realCaseStory.innerText = caseData.story;
+        realCaseImage.src = caseData.image;
+    }
+
+    function restartInterval() {
+        clearInterval(intervalId); 
+        intervalId = setInterval(nextCase, 6000); 
+    }
+
+    function nextCase() {
+        if (currentCaseIndex < realCases.length - 1) {
+            currentCaseIndex++;
+        } else {
+            currentCaseIndex = 0;
+        }
+        updateRealCase();
+    }
+
+    prevArrow.addEventListener('click', function () {
+        if (currentCaseIndex > 0) {
+            currentCaseIndex--;
+        } else {
+            currentCaseIndex = realCases.length - 1;
+        }
+        updateRealCase();
+        restartInterval(); 
+    });
+
+    nextArrow.addEventListener('click', function () {
+        nextCase(); 
+        restartInterval(); 
+    });
+
+    intervalId = setInterval(nextCase, 6000);
+    updateRealCase();
+    const currentYear = new Date().getFullYear();
+    document.getElementById('current-year').textContent = currentYear;
+});
+
+

@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/propose_date.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="propose-date-container">
+    <h1>Propose a Date</h1>
+    <h2>Send a Proposal to <span class="recipient-name">{{ recipient.profile.name }}</span></h2>
+
+    <form id="date-form" action="{{ url_for('main.send_proposal', user_id=user_id) }}" method="POST">
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required min="{{ today }}" onchange="loadTables()" />
+        </div>
+
+        <div id="table-selection" style="display: none; margin-top: 15px;">
+            <label>Select a Table:</label>
+            <div id="table-buttons" class="table-buttons">
+
+            </div>
+            <div id="availability-message" style="margin-top: 10px;"></div>
+        </div>
+
+        <div id="time-selection" style="display: none; margin-top: 15px;">
+            <label for="time">Select a Time:</label>
+            <div>
+                <label>
+                    <input type="radio" name="time" value="20:00" /> 20:00
+                </label>
+                <label>
+                    <input type="radio" name="time" value="21:00" checked /> 21:00
+                </label>
+                <label>
+                    <input type="radio" name="time" value="22:00" /> 22:00
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="message">Message (Optional):</label>
+            <textarea id="message" name="message" placeholder="Write a message to {{ recipient.profile.name }}..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">Propose</button>
+    </form>
+</div>
+
+<script>
+    const tablesByDay = {
+        1: 3, // Monday
+        2: 3, // Tuesday
+        3: 3, // Wednesday
+        4: 3, // Thursday
+        5: 4, // Friday
+        6: 5, // Saturday
+        0: 4, // Sunday
+    };
+
+    async function loadTables() {
+        const dateInput = document.getElementById("date").value;
+        const tableSelection = document.getElementById("table-selection");
+        const tableButtons = document.getElementById("table-buttons");
+        const availabilityMessage = document.getElementById("availability-message");
+
+        if (!dateInput) return;
+
+        const selectedDate = new Date(dateInput);
+        const dayOfWeek = selectedDate.getDay(); // Sunday = 0, Monday = 1, ...
+        const numTables = tablesByDay[dayOfWeek] || 0;
+
+        tableButtons.innerHTML = "";
+        availabilityMessage.innerHTML = "";
+
+        for (let i = 1; i <= numTables; i++) {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.textContent = `Table ${i}`;
+            button.className = "table-button";
+            button.style.margin = "5px";
+            
+            button.onclick = () => selectTable(i);
+            
+            tableButtons.appendChild(button);
+        }
+
+        tableSelection.style.display = "block";
+
+        
+        if (data.availableTables.length > 0) {
+            availabilityMessage.innerHTML = `Available tables: ${data.availableTables.join(', ')}`;
+        } else {
+            availabilityMessage.innerHTML = "No available tables for this date.";
+        }
+    }
+
+    function selectTable(tableId) {
+        document.querySelectorAll(".table-button").forEach(button => {
+            button.classList.remove("selected");
+        });
+
+        const selectedButton = Array.from(document.getElementsByClassName("table-button"))
+            .find(button => button.textContent.includes(`Table ${tableId}`));
+        selectedButton.classList.add("selected");
+
+        let hiddenInput = document.getElementById("selected_table");
+        if (!hiddenInput) {
+            hiddenInput = document.createElement("input");
+            hiddenInput.type = "hidden";
+            hiddenInput.id = "selected_table";
+            hiddenInput.name = "selected_table";
+            document.getElementById("date-form").appendChild(hiddenInput);
+        }
+        hiddenInput.value = tableId;
+
+        document.getElementById("time-selection").style.display = "block";
+    }
+</script>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="notification">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+{% endblock %}
+
+

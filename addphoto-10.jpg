@@ -1,0 +1,35 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const yearPicker = document.querySelector(".year-grid");
+    const yearInput = document.getElementById("year");
+    const yearPickerContainer = document.getElementById("year-picker");
+
+    const startYear = 1950;
+    const endYear = 2006;
+
+    for (let year = startYear; year <= endYear; year++) {
+        const yearDiv = document.createElement("div");
+        yearDiv.textContent = year;
+        yearDiv.dataset.year = year;
+
+        yearDiv.addEventListener("click", () => {
+            yearInput.value = yearDiv.dataset.year;  
+            yearPicker.style.display = "none"; 
+        });
+        yearPicker.appendChild(yearDiv);
+    }
+
+    yearInput.addEventListener("click", () => {
+        yearPicker.style.display = yearPicker.style.display === "block" ? "none" : "block";
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!yearPickerContainer.contains(event.target)) {
+            yearPicker.style.display = "none";
+        }
+    });
+});
+
+
+
+
+

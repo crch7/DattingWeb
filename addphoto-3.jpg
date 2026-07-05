@@ -1,0 +1,44 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const tablesByDay = {
+        1: 3, // Monday
+        2: 3, // Tuesday
+        3: 3, // Wednesday
+        4: 3, // Thursday
+        5: 4, // Friday
+        6: 5, // Saturday
+        0: 4, // Sunday
+    };
+
+    function loadTables() {
+        const dateInput = document.getElementById("date").value;
+        const tableSelect = document.getElementById("table");
+        const tableSelection = document.getElementById("table-selection");
+
+        if (!dateInput) return;
+
+        const selectedDate = new Date(dateInput);
+        const dayOfWeek = selectedDate.getDay(); // Sunday = 0, Monday = 1, ...
+        const numTables = tablesByDay[dayOfWeek] || 0;
+
+        tableSelect.innerHTML = "<option value=''>Select a table</option>"; 
+
+        for (let i = 1; i <= numTables; i++) {
+            const option = document.createElement("option");
+            option.value = i;
+            option.textContent = `Table ${i}`;
+            tableSelect.appendChild(option);
+        }
+        tableSelection.style.display = "block";
+    }
+
+    function showTimeSelection() {
+        const tableSelect = document.getElementById("table");
+        const timeSelection = document.getElementById("time-selection");
+
+        if (tableSelect.value) {
+            timeSelection.style.display = "block";
+        } else {
+            timeSelection.style.display = "none";
+        }
+    }
+});

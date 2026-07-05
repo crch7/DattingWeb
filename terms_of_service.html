@@ -1,0 +1,72 @@
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="app-container">
+    <header>
+        <h1>Meet&Eat</h1>
+        <h1>Welcome to Meet&Eat</h1>
+        <p>Start lovin'</p>
+        <a href="{{ url_for('auth.signup') }}" class="sign-up-btn">Be the next one!</a>
+    </header> 
+
+    <div class="real-cases-container">
+        <div class="real-case">
+            <div class="real-case-content">
+                <h2 id="real-case-title">Real Case #1</h2>
+                <p id="real-case-story">Here is a story of how they met...</p>
+                <img id="real-case-image" src="{{ url_for('static', filename='photos/photo-case1.jpg') }}">
+            </div>
+            <div class="arrows">
+                <button id="prev-arrow" class="arrow">&#8592;</button>
+                <button id="next-arrow" class="arrow">&#8594;</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="login-container">
+    <a href="{{ url_for('auth.login') }}" class="log-in-btn">Log In</a>
+    </div>
+
+    <div class="our-info">
+        <p>What is Meet&Eat?</p>
+        <p>We're more than just a restaurant – we've created a unique dating app just for our guests! With our app, you can match with fellow food lovers, and when you find a connection, invite them to join you for a memorable dining experience at our restaurant. Whether it's sharing a delicious meal or discovering a new favorite dish together, we believe the perfect match goes beyond just a date.</p>
+        <p>Join us today and find your match over great food!</p>
+    </div>
+
+
+    <footer class="footer">
+        <p>&copy; <span id="current-year"></span> Meet&Eat. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="{{ url_for('main.privacy_policy') }}" class="footer-link">Privacy Policy</a>
+            <a href="{{ url_for('main.terms_of_service') }}" class="footer-link">Terms of Service</a>
+            <a href="{{ url_for('main.contact') }}" class="footer-link">Contact Us</a>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+    const realCases = [
+        {
+            title: "Emily & Alex",
+            story: "Emily and Alex matched on a crisp autumn evening, united by their shared passion for books and playful banter. Their first date at our restaurant was cozy and heartfelt, as they discovered a mutual love for desserts and exchanged stories about their favorite authors. The warm ambiance of the evening became the perfect backdrop for their growing connection. Months later, under a sky full of stars, Alex proposed, and their Meet&Eat moment turned into a lifelong adventure.",
+            image: "{{ url_for('static', filename='photos/photo-case1.jpg') }}"
+        },
+        {
+            title: "Liam & Noah",
+            story: "Liam and Noah’s journey began on Meet&Eat, drawn together by their shared love for indie music and their quirky profiles. Their first date at our restaurant was unforgettable—a rainy evening turned radiant as they bonded over their favorite bands and a mutual love for trying new dishes. By the end of the night, it was clear they’d found something special. A year later, beneath the city lights, Liam proposed, and Noah said yes to forever.",
+            image: "{{ url_for('static', filename='photos/photo-case2.jpg') }}"
+        },
+        {
+            title: "Sofia & Juan",
+            story: "Sofia and Juan joined Meet&Eat looking for love, but they found so much more—a partner who shared their dreams of family. Their first date at our restaurant was magical, filled with laughter, shared stories, and a connection that felt effortless. Juan spoke about his daughter, Lily, and Sofia’s warmth lit up the conversation. Today, they’re a joyful family of three, building a life filled with love, laughter, and endless memories.",
+            image: "{{ url_for('static', filename='photos/photo-case3.jpg') }}"
+        }
+    ];
+</script>
+{% endblock %}

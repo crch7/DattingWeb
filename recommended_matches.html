@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/create_profile-preferences.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="profile-container">
+    <h1>Your Preferences</h1>
+
+    <form action="{{ url_for('main.create_preferences_post') }}" method="post" enctype="multipart/form-data">
+
+        <fieldset>
+            <legend>Interested Genders:</legend>
+            <label>
+                <input type="checkbox" name="interested_genders[]" value="MALE" 
+                    {% if matches and 'MALE' in matches.interested_genders %}checked{% endif %}>
+                Male
+            </label>
+            <label>
+                <input type="checkbox" name="interested_genders[]" value="FEMALE" 
+                    {% if matches and 'FEMALE' in matches.interested_genders %}checked{% endif %}>
+                Female
+            </label>
+            <label>
+                <input type="checkbox" name="interested_genders[]" value="NON_BINARY" 
+                    {% if matches and 'NON_BINARY' in matches.interested_genders %}checked{% endif %}>
+                Non-binary
+            </label>
+            <label>
+                <input type="checkbox" name="interested_genders[]" value="OTHER" 
+                    {% if matches and 'OTHER' in matches.interested_genders %}checked{% endif %}>
+                Other
+            </label>
+        </fieldset>
+               
+        <div>
+            <label>Older age range: 
+                <input type="number" name="min_age" value="{{ matches.min_age if matches else '' }}" required step="1" min="0" />
+            </label>
+        </div>
+        <div>
+            <label>Younger age range: 
+                <input type="number" name="max_age" value="{{ matches.max_age if matches else '' }}" required step="1" min="0" />
+            </label>
+        </div>
+        
+        <fieldset>
+            <legend>Relationship Type:</legend>
+            <label>
+                <input type="radio" name="relationship_type" value="SERIOUS" checked
+                    {% if matches and matches.relationship_type == 'SERIOUS' %}checked{% endif %}>
+                Serious
+            </label>
+            <label>
+                <input type="radio" name="relationship_type" value="CASUAL" 
+                    {% if matches and matches.relationship_type == 'CASUAL' %}checked{% endif %}>
+                Casual
+            </label>
+            <label>
+                <input type="radio" name="relationship_type" value="FRIEND" 
+                    {% if matches and matches.relationship_type == 'FRIEND' %}checked{% endif %}>
+                Friend
+            </label>
+        </fieldset>
+
+
+        <button type="submit">Save Preferences</button>
+    </form>
+
+</div>
+{% endblock %}

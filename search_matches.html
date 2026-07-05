@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/create_profile-preferences.css') }}">
+    <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <h1>Your Profile</h1>
+
+    <form action="{{ url_for('main.edit_profile') }}" method="POST" enctype="multipart/form-data">
+        
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="MALE" {% if profile and profile.gender == 'MALE' %}selected{% endif %}>Male</option>
+            <option value="FEMALE" {% if profile and profile.gender == 'FEMALE' %}selected{% endif %}>Female</option>
+            <option value="NON_BINARY" {% if profile and profile.gender == 'NON_BINARY' %}selected{% endif %}>Non-binary</option>
+            <option value="OTHER" {% if profile and profile.gender == 'OTHER' %}selected{% endif %}>Other</option>
+        </select>
+
+
+        <label for="bio">Biography:</label>
+        <textarea id="bio" name="bio" required>{{ profile.bio if profile else '' }}</textarea>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city"  value="{{ profile.city if profile else '' }}">
+
+        <fieldset>
+            <legend>Allergies (Optional):</legend>
+            <label>
+                <input type="checkbox" name="allergies[]" value="Peanuts" 
+                    {% if profile and 'Peanuts' in profile.allergies %}checked{% endif %}>
+                Peanuts
+            </label>
+            <label>
+                <input type="checkbox" name="allergies[]" value="Dairy" 
+                    {% if profile and 'Dairy' in profile.allergies %}checked{% endif %}>
+                Dairy
+            </label>
+            <label>
+                <input type="checkbox" name="allergies[]" value="Gluten" 
+                    {% if profile and 'Gluten' in profile.allergies %}checked{% endif %}>
+                Gluten
+            </label>
+            <label>
+                <input type="checkbox" name="allergies[]" value="Other" 
+                    {% if profile and 'Other' in profile.allergies %}checked{% endif %}>
+                Other:
+                <input type="text" name="allergies_other" value="{{ profile.allergies_other if profile else '' }}">
+            </label>
+        </fieldset>
+
+
+        <fieldset>
+            <legend>Study Level (Optional):</legend>
+            <label>
+                <input type="radio" name="study" value="Highschool" 
+                    {% if profile and profile.study == 'Highschool' %}checked{% endif %}> Highschool
+            </label>
+            <label>
+                <input type="radio" name="study" value="Bachelor" 
+                    {% if profile and profile.study == 'Bachelor' %}checked{% endif %}> Bachelor
+            </label>
+            <label>
+                <input type="radio" name="study" value="Master" 
+                    {% if profile and profile.study == 'Master' %}checked{% endif %}> Master
+            </label>
+            <label>
+                <input type="radio" name="study" value="None" 
+                    {% if profile and profile.study == 'None' %}checked{% endif %}> None
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Hobbies  (Optional, max. 5):</legend>
+            {% for hobby in ['Football', 'Basketball', 'Padel', 'Swimming', 'Tennis', 'Volleyball',
+                             'Videogames', 'Movies', 'Series', 'Art', 'Reading', 'Cooking',
+                             'Friends', 'Family', 'Mountain', 'Sea', 'Travelling', 'Photography',
+                             'Gym', 'Skiing'] %}
+                <label>
+                    <input type="checkbox" name="hobbies[]" value="{{ hobby }}"
+                        {% if profile and hobby in profile.hobbies.split(',') %}checked{% endif %}>
+                    {{ hobby }}
+                </label>
+            {% endfor %}
+        </fieldset>
+
+        <fieldset>
+            <legend>Music Preferences (Optional):</legend>
+            <label>
+                <input type="checkbox" name="music[]" value="Pop" {% if profile and  'Pop' in profile.music %}checked{% endif %}>
+                Pop
+            </label>
+            <label>
+                <input type="checkbox" name="music[]" value="Rock" {% if profile and  'Rock' in profile.music %}checked{% endif %}>
+                Rock
+            </label>
+            <label>
+                <input type="checkbox" name="music[]" value="Jazz" {% if profile and  'Jazz' in profile.music %}checked{% endif %}>
+                Jazz
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Favorite Food (Optional):</legend>
+            <label>
+                <input type="checkbox" name="cuisine[]" value="Italian" {% if profile and  'Italian' in profile.cuisine %}checked{% endif %}>
+                Italian
+            </label>
+            <label>
+                <input type="checkbox" name="cuisine[]" value="Asian" {% if profile and 'Asian' in profile.cuisine %}checked{% endif %}>
+                Asian
+            </label>
+
+            <label>
+                <input type="checkbox" name="cuisine[]" value="American" {% if profile and  'American' in profile.cuisine %}checked{% endif %}>
+                American
+            </label>
+            <label>
+                <input type="checkbox" name="cuisine[]" value="Mexican" {% if profile and  'Mexican' in profile.cuisine %}checked{% endif %}>
+                Mexican
+            </label>
+            <label>
+                <input type="checkbox" name="cuisine[]" value="Spanish" {% if profile and  'Spanish' in profile.cuisine %}checked{% endif %}>
+                Spanish
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Personality Traits (Optional):</legend>
+            <label>
+                <input type="checkbox" name="personality_traits[]" value="Outgoing" {% if profile and  'Outgoing' in profile.personality_traits %}checked{% endif %}>
+                Outgoing
+            </label>
+            <label>
+                <input type="checkbox" name="personality_traits[]" value="Adventurous" {% if profile and  'Adventurous' in profile.personality_traits %}checked{% endif %}>
+                Adventurous
+            </label>
+            <label>
+                <input type="checkbox" name="personality_traits[]" value="Empathetic" {% if profile and  'Empathetic' in profile.personality_traits %}checked{% endif %}>
+                Empathetic
+            </label>
+        </fieldset>
+       
+        <fieldset>
+            <legend>Lifestyle Choices (Optional):</legend>
+            <label>
+                <input type="checkbox" name="lifestyle[]" value="Non-Smoker" {% if profile and  'Non-Smoker' in profile.lifestyle %}checked{% endif %}>
+                Non-Smoker
+            </label>
+            <label>
+                <input type="checkbox" name="lifestyle[]" value="Casual Drinker" {% if profile and  'Casual Drinker' in profile.lifestyle %}checked{% endif %}>
+                Casual Drinker
+            </label>
+            <label>
+                <input type="checkbox" name="lifestyle[]" value="Gym Enthusiast" {% if profile and  'Gym Enthusiast' in profile.lifestyle %}checked{% endif %}>
+                Gym Enthusiast
+            </label>
+        </fieldset>
+        
+        <label for="photo">Profile Photo:</label>
+        <input type="file" name="photo" accept="image/jpeg,image/png" required>
+
+        <button type="submit">Save Profile</button>
+    </form>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"][name="hobbies[]"]');
+        const maxSelections = 5;
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const selected = Array.from(checkboxes).filter(cb => cb.checked);
+                if (selected.length > maxSelections) {
+                    alert(`Maximum 5 hobbies`);
+                    checkbox.checked = false;
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}
+
+

@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #333;
+    margin-top: 30px;
+}
+
+.matches a {
+    color: #FF4081;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.matches a:hover {
+    color: #FF4081;
+    text-decoration: underline;
+}
+
+.matches {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.matches ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.matches p {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.matches h3 {
+    font-size: 24px;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.matches p {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.matches .notification {
+    background-color: #ffdd57;
+    color: #333;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.action-form {
+    flex: 1;
+    margin: 0 5px;
+}
+
+.action-form button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.like-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.unlike-button {
+    background-color: #E53935;
+    color: white;
+}
+
+.block-button {
+    background-color: #1E88E5;
+    color: white;
+}
+
+.unblock-button {
+    background-color: #FB8C00;
+    color: white;
+}
+
+.action-form button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.action-form button:active {
+    transform: scale(1.02);
+}
+
+.matches p i {
+    font-style: italic;
+    color: #777;
+}
+
+form {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.notification-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+img {
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
